@@ -21,6 +21,7 @@ export class VehicleController {
 
   @Post()
   async createVehicle(@Body() vehicle: VehicleDto): Promise<VehicleEntity> {
+    logger.info('Create a new vehicle')
     return this.vehicleService.createNewVehicle(vehicle);
   }  
 

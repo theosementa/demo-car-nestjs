@@ -1,6 +1,6 @@
 ### Setup
 
-- Lancer le projet `docker compose up`
+- Lancer le projet `docker compose up --build`
 
 ### Logs
 
