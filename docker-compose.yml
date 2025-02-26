@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres_demo_nestjs_vehicle
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: demo_nestjs_api_vehicle
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: password
+      DB_NAME: mydatabase
+      LOG_PATH: /var/log/nestjs/app.log
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - logs:/var/log/nestjs
+    command: npm run start:dev
+
+  frontend:
+    build: ./frontend
+    container_name: demo_react_frontend
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      VITE_API_URL: http://localhost:3000
+    command: npm run dev
+
+volumes:
+  postgres_data:
+  logs:
