@@ -31,7 +31,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: your-dockerhub-username/demo-nestjs-api-vehicle:latest
+          tags: theosementa0/demo-nestjs-api-vehicle:latest
 
       - name: Build and Push frontend Docker image
         uses: docker/build-push-action@v2
@@ -39,4 +39,4 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: your-dockerhub-username/demo-react-frontend:latest
+          tags: theosementa0/demo-react-frontend:latest
