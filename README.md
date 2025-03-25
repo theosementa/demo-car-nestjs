@@ -1,3 +1,5 @@
+### Exercice MNS M2I
+
 ### Setup
 
 - Lancer le projet `docker compose up --build`
